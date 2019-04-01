@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Bamazon</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="assets/style.css">
+    <link href='https://fonts.googleapis.com/css?family=Alegreya Sans SC' rel='stylesheet'>
+  </head>
+  <body>
+
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1 class="display-4">Bamazon</h1>
+        <p class="lead">What would you like to buy?</p>
+      </div>
+    </div>
+
+    <!--Product table-->
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8">
+          <h2>Products</h2>
+          <table class="table table-hover" id="product-table">
+            <thead>
+              <tr>
+                <td class="table-heading">ID</th>
+                <td class="table-heading">Product Name</th>
+                <td class="table-heading">Department</th>
+                <td class="table-heading">Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <!--new table info will be added here-->
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!--Form to buy products-->
+        <div class="col-md-2">
+          <div class="card" id="buy-product-card" style="width: 16rem;">
+              <div class="card-body">
+                <h2>What would you like to buy?</h2>
+                <form>
+                  <div class="form-group">
+                    <label for="product-id-input">Product ID</label>
+                    <input type="number" class="form-control-sm" id="product-id-input">
+                  </div>
+                  <div class="form-group">
+                    <label for="quantity">Quantity</label>
+                    <input type="number" class="form-control-sm" id="quantity">
+                  </div>
+                </form>
+                <button type="button" id="purchase" class="btn btn-dark">Purchase</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--Form to add products-->
+        <div class="col-md-2">
+          <div class="card" id="add-product-card" style="width: 16rem;">
+              <div class="card-body">
+                <h2>Add new products</h2>
+                <form>
+                  <div class="form-group">
+                    <label for="product-name-input">Product name</label>
+                    <input type="text" class="form-control-sm" id="product-name-input">
+                  </div>
+                  <div class="form-group">
+                    <label for="department-input">Department</label>
+                    <input type="text" class="form-control-sm" id="department-input">
+                  </div>
+                  <div class="form-group">
+                    <label for="price-input">Price</label>
+                    <input type="text" class="form-control-sm" id="price-input">
+                  </div>
+                  <div class="form-group">
+                    <label for="quantity">Quantity</label>
+                    <input type="number" class="form-control-sm" id="quantity">
+                  </div>
+                </form>
+                <button type="button" id="add-product" class="btn btn-dark">Add Product</button>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+
+    <!--Train added modal-->
+    <div class="modal" id="train-added-modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Schedule update</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Your train has been added.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" id="close-modal-button" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
