@@ -7,7 +7,7 @@ const product = require("../models/product.js");
 router.get("/api/products", function (req, res) {
   product.selectAll(function (data) {
     res.json(data);
-    console.log(data);
+    console.table(data);
   });
 });
 
@@ -23,19 +23,17 @@ router.post("/api/products", function (req, res) {
 });
 
 router.put("/api/products/:id", function (req, res) {
-  const condition = "id = " + req.params.id;
-
-  console.log("condition", condition);
-
-  product.updateOne({
-    stock_quantity: req.body.stock_quantity
-  }, condition, function (result) {
-    if (result.changedRows === 0) {
-      // If no rows were changed, then the ID must not exist, so 404
-      return res.status(404).end();
+  product.updateOne(
+    parseInt(req.body.quantityRequested),
+    req.params.id, function (result) {
+      if (result.changedRows === 0) {
+        // If no rows were changed, then the ID must not exist, so 404
+        return res.status(404).end();
+      }
+      console.log(result);
+      res.json(result).status(200).end();
     }
-    res.status(200).end();
-  });
+  );
 });
 
 // Export routes for server.js to use.

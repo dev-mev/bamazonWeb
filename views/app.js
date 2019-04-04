@@ -23,19 +23,31 @@ $(function () {
   );
 
   $("#purchase").on("click", function () {
-    const chosenItem = parseInt($("#product-id-input").val());
-    const quantityRequested = parseInt($("#quantity").val());
-
-    $.ajax("/api/products/" + chosenItem, {
+    $.ajax("/api/products/" + parseInt($("#product-id-input").val()), {
       type: "PUT",
-      data: [{
-        stock_quantity: quantityAfterPurchase,
-        product_sales: totalProductSales
-      },
-      {
-        item_id: chosenItem
-      }]
+      data: {
+        quantityRequested: parseInt($("#quantity").val())
+      }
     }).then(
-      // TODO: 
-      );
+      // TODO:
+      function (resp) {
+        $(".purchase-modal-body").empty();
+        console.log("------------------------");
+        console.log(resp[0].price);
+        if (resp[0].stock_quantity >= $("#quantity").val()) {
+          $(".purchase-modal-body").text("Your total is $" + resp[0].price * parseInt($("#quantity").val()) + ". ")
+            .append("We will ship your item '"
+              + resp[0].product_name + "' (quantity: "
+              + $("#quantity").val() + ") within three business days.");
+        } else {
+          $(".purchase-modal-body").text("Sorry, we only have " + resp[0].stock_quantity + " available.");
+        }
+        $("#purchase-complete-modal").show();
+      }
+    );
+  });
+
+  $(".close").on("click", function () {
+    $("#purchase-complete-modal").hide();
+  });
 });

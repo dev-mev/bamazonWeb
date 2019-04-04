@@ -1,3 +1,5 @@
+const mysql = require("mysql");
+
 // Import MySQL connection.
 const connection = require("../config/connection");
 
@@ -63,35 +65,25 @@ const product = {
       cb(result);
     });
   },
-  updateOne: (objColVals, condition, cb) => {
-    const queryString = `
+  updateOne: (quantity, item, cb) => {
+    const query1 = `
       UPDATE products
-      SET ${objToSql(objColVals)}
-      WHERE ${condition}`;
+      SET stock_quantity = (stock_quantity - ?), product_sales = product_sales + (price * ?)
+      WHERE item_id = ?;
+      SELECT ??, ??, ?? FROM ?? WHERE ?? = ?;`;
 
-    console.log(queryString);
-    connection.query(queryString, function (err, result) {
+    const params = [quantity, quantity, item, "price", "stock_quantity", "product_name", "products", "item_id", item];
+
+    const queryString1 = mysql.format(query1, params);
+    console.log(queryString1);
+
+    connection.query(queryString1, function (err, result) {
       if (err) {
         throw err;
       }
 
-      cb(result);
+      cb(result[1]);
     });
-  },
-  getInvoice: (itemId, quantity) => {
-    // TODO:
-    // const quantityAfterPurchase = chosenItem.stock_quantity - parseInt(quantityRequested);
-    // const totalProductSales = (chosenItem.price * parseInt(quantityRequested)) + chosenItem.product_sales;
-
-    // if (chosenItem.stock_quantity >= quantityRequested) {
-    //   console.log("We will ship your item '"
-    //     + chosenItem.product_name + "' (quantity: "
-    //     + quantityRequested + ") within three business days.");
-
-    //   console.log("Your total is $" + chosenItem.price * parseInt(quantityRequested));
-    // } else {
-    //   console.log("Sorry, we only have " + chosenItem.stock_quantity + " available.");
-    // }
   }
 };
 
